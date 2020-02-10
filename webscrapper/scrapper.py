@@ -11,7 +11,7 @@ get the url for each items found in the search results
 """
 def get_items_links(base_url):
     items_links = []
-    #paginate following this syntax : https://deals.jumia.ci/abidjan/appartements-a-vendre?page=1é
+    #paginate following this syntax : https://deals.jumia.ci/abidjan/appartements-a-vendre?page=1
     for i in range(10):
         page = base_url+'?page='+str(i+1)
         request_result = requests.get(page)
@@ -88,5 +88,9 @@ url = 'https://deals.jumia.ci/abidjan/appartements-a-vendre'
 
 links = get_items_links(url)
 data = get_item_details(links)
+
+#export data into csv file
+timestr = time.strftime("%Y%m%d")
+data.to_csv(timestr+'_abj_appart_a_vendre.csv')
 
 print(data.head(20))
